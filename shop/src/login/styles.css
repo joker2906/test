@@ -1,0 +1,123 @@
+/* Global styles for the login system */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  color: #e8e8e8;
+  overflow-x: hidden;
+}
+
+/* Shimmer animation for glassmorphism effect */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Hover effects for interactive elements */
+.submit:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 35px rgba(255, 215, 0, 0.5);
+}
+
+.gray:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #e8e8e8;
+}
+
+.forgotPasswordSpan:hover {
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.link:hover {
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    width: 90% !important;
+    padding: 2rem !important;
+  }
+
+  .title {
+    font-size: 2rem !important;
+  }
+
+  .submit {
+    width: 100% !important;
+    height: 45px !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 95% !important;
+    padding: 1.5rem !important;
+  }
+
+  .title {
+    font-size: 1.8rem !important;
+  }
+
+  .inputField {
+    padding: 0.8rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .submit {
+    height: 40px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Additional responsive styles for Login component */
+@media (max-width: 1024px) {
+  .container {
+    width: 500px !important;
+    padding: 2.5rem !important;
+  }
+
+  .title {
+    font-size: 2.2rem !important;
+  }
+
+  .submit {
+    width: 160px !important;
+    height: 45px !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 450px !important;
+    padding: 2rem !important;
+  }
+
+  .title {
+    font-size: 2rem !important;
+  }
+
+  .inputField {
+    padding: 0.9rem 1.2rem !important;
+    font-size: 0.95rem !important;
+  }
+
+  .submit {
+    width: 150px !important;
+    height: 42px !important;
+    font-size: 0.9rem !important;
+  }
+}

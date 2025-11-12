@@ -1,0 +1,335 @@
+.cart-container {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 100px auto;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cart-header h1 {
+  margin-bottom: 30px;
+  font-family: 'Playfair Display', serif;
+  color: #ffd700;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.empty-cart p {
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+  color: rgba(232, 232, 232, 0.9);
+  text-align: center;
+  font-weight: 300;
+}
+
+.back-home-btn {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.back-home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cart-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+}
+
+.cart-item-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-right: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-name {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #e8e8e8;
+  font-weight: 600;
+}
+
+.cart-item-price {
+  margin: 10px 0;
+  font-weight: 700;
+  color: #ffd700;
+  font-size: 1.2rem;
+}
+
+.cart-item-size {
+  margin: 10px 0;
+  color: rgba(232, 232, 232, 0.7);
+  font-size: 1rem;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.quantity-btn {
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #333 0%, #555 100%);
+  color: #e8e8e8;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.quantity-btn:hover {
+  background: linear-gradient(135deg, #555 0%, #777 100%);
+  transform: scale(1.05);
+}
+
+.quantity-display {
+  margin: 0 15px;
+  color: #e8e8e8;
+  font-weight: 600;
+}
+
+.remove-btn {
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #ff4d4d 0%, #cc0000 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(255, 77, 77, 0.3);
+}
+
+.remove-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 77, 77, 0.5);
+}
+
+.cart-summary {
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  padding-top: 30px;
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.cart-total {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  text-align: center;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.clear-cart-btn {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #ff4d4d 0%, #cc0000 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+}
+
+.clear-cart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 77, 77, 0.5);
+}
+
+.checkout-btn {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.checkout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .cart-container {
+    padding: 30px;
+    margin: 80px auto;
+  }
+
+  .cart-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .cart-item {
+    padding: 15px;
+  }
+
+  .cart-item-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+
+  .cart-item-name {
+    font-size: 1.3rem;
+  }
+
+  .cart-summary {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-container {
+    padding: 20px;
+    margin: 60px auto;
+  }
+
+  .cart-header h1 {
+    font-size: 2rem;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .cart-item-image {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .cart-item-details {
+    text-align: center;
+  }
+
+  .quantity-controls {
+    justify-content: center;
+  }
+
+  .cart-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .cart-summary {
+    padding: 20px;
+  }
+
+  .cart-total {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-container {
+    padding: 15px;
+    margin: 40px auto;
+  }
+
+  .cart-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .empty-cart p {
+    font-size: 1.2rem;
+  }
+
+  .back-home-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+
+  .cart-item {
+    padding: 12px;
+  }
+
+  .cart-item-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .cart-item-name {
+    font-size: 1.2rem;
+  }
+
+  .cart-item-price {
+    font-size: 1.1rem;
+  }
+
+  .quantity-btn {
+    padding: 6px 10px;
+  }
+
+  .remove-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .cart-summary {
+    padding: 15px;
+  }
+
+  .cart-total {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .clear-cart-btn,
+  .checkout-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}
