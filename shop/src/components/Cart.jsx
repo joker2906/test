@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from './logo.jpg';
 import { FaBars, FaSearch, FaTimes, FaPlus, FaMinus } from 'react-icons/fa';
-import { useCart } from './CartContext';
+import { useCart } from './useCartHook';
 import './Cart.css';
 
 const Cart = () => {
@@ -55,7 +55,7 @@ const Cart = () => {
           </div>
         ) : (
           <div>
-            {filteredCart.map((item, index) => (
+            {filteredCart.map((item) => (
               <div key={`${item.name}-${item.size}`} className="cart-item" style={{ textAlign: 'left' }}>
                 <img src={item.image} alt={item.name} className="cart-item-image" />
                 <div className="cart-item-details" style={{ textAlign: 'left' }}>

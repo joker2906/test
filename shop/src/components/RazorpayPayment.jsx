@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from './CartContext';
+import { useCart } from './useCartHook';
+import api from '../services/api';
 
 
 const RazorpayPayment = () => {
@@ -21,18 +22,33 @@ const RazorpayPayment = () => {
     }
   }, [navigate]);
 
-  useEffect(() => {
-    if (shippingDetails) {
-      // Razorpay integration
-      const options = {
-        key: 'rzp_test_Ra1DZZ9t1TWTUw', // Test API Key
-        amount: total * 100, // Amount in paisa (multiply by 100 for rupees)
-        currency: 'INR',
-        name: 'RowdyWear',
-        description: 'Purchase from RowdyWear',
-        image: '/logo.jpg', // Optional
-        handler: function (response) {
-          // Payment success handler
+  const handlePaymentClick = () => {
+    if (!window.Razorpay) {
+      alert('Razorpay is not loaded. Please refresh the page and try again.');
+      return;
+    }
+
+    if (!shippingDetails) {
+      alert('Shipping details not found. Please go back to checkout.');
+      navigate('/checkout');
+      return;
+    }
+
+    // Razorpay integration
+    const options = {
+      key: 'rzp_test_RemvVoxNmSdEWl', // Test API Key
+      amount: total * 100, // Amount in paisa (multiply by 100 for rupees)
+      currency: 'INR',
+      name: 'RowdyWear',
+      description: 'Purchase from RowdyWear',
+      image: '/logo.jpg', // Optional
+      handler: async function (response) {
+        // Payment success handler
+        try {
+          const orderId = localStorage.getItem('currentOrderId');
+          if (orderId) {
+            await api.put(`/orders/${orderId}/pay`, { paymentId: response.razorpay_payment_id });
+          }
           const order = {
             items: cart,
             total: total,
@@ -41,27 +57,35 @@ const RazorpayPayment = () => {
           };
           addOrder(order);
           clearCart();
-          localStorage.removeItem('shippingDetails'); // Clean up
+          localStorage.removeItem('shippingDetails');
+          localStorage.removeItem('currentOrderId');
           alert('Payment successful! Order placed.');
           navigate('/home');
-        },
-        prefill: {
-          name: shippingDetails?.name || '',
-          email: 'customer@example.com', // You can get this from user context if available
-          contact: shippingDetails?.phone || ''
-        },
-        notes: {
-          address: shippingDetails?.address || ''
-        },
-        theme: {
-          color: '#ffd700'
+        } catch {
+          alert('Payment captured, but failed to update order status.');
         }
-      };
+      },
+      prefill: {
+        name: shippingDetails?.name || '',
+        email: 'customer@example.com',
+        contact: shippingDetails?.phone || ''
+      },
+      notes: {
+        address: shippingDetails?.address || ''
+      },
+      theme: {
+        color: '#ffd700'
+      }
+    };
 
+    try {
       const rzp = new window.Razorpay(options);
       rzp.open();
+    } catch (error) {
+      console.error('Razorpay Error:', error);
+      alert('Failed to initialize Razorpay. Please try again.');
     }
-  }, [shippingDetails, cart, total, addOrder, clearCart, navigate]);
+  };
 
   if (cart.length === 0) {
     return (
@@ -80,11 +104,53 @@ const RazorpayPayment = () => {
   return (
     <div className="payment-container" style={{ textAlign: 'center' }}>
       <div className="payment-header" style={{ textAlign: 'center' }}>
-        <h1 style={{ textAlign: 'center', fontFamily: "'Playfair Display', serif", color: '#ffd700', textShadow: '0 0 30px rgba(255, 215, 0, 0.3)' }}>Processing Payment</h1>
+        <h1 style={{ textAlign: 'center', fontFamily: "'Playfair Display', serif", color: '#ffd700', textShadow: '0 0 30px rgba(255, 215, 0, 0.3)' }}>Payment</h1>
       </div>
-      <div className="payment-content" style={{ textAlign: 'center' }}>
-        <p style={{ textAlign: 'center', color: 'rgba(232, 232, 232, 0.9)', fontSize: '1.2rem' }}>Redirecting to Razorpay...</p>
-        <button className="back-btn" onClick={() => navigate('/checkout')} style={{ textAlign: 'center' }}>Back to Checkout</button>
+      <div className="payment-content" style={{ textAlign: 'center', padding: '2rem' }}>
+        <p style={{ textAlign: 'center', color: 'rgba(232, 232, 232, 0.9)', fontSize: '1.2rem', marginBottom: '1rem' }}>Order Total: ₹{total.toFixed(2)}</p>
+        <p style={{ textAlign: 'center', color: 'rgba(232, 232, 232, 0.7)', fontSize: '1rem', marginBottom: '2rem' }}>Click the button below to proceed with Razorpay payment</p>
+        <button 
+          onClick={handlePaymentClick} 
+          style={{
+            background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+            color: '#1a1a2e',
+            border: 'none',
+            borderRadius: '50px',
+            padding: '1rem 2rem',
+            fontSize: '1.1rem',
+            fontWeight: 600,
+            fontFamily: "'Inter', sans-serif",
+            cursor: 'pointer',
+            marginRight: '1rem',
+            transition: 'all 0.4s ease',
+            boxShadow: '0 8px 32px rgba(255, 215, 0, 0.3)',
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            marginBottom: '1rem'
+          }}
+        >
+          Pay with Razorpay
+        </button>
+        <button 
+          onClick={() => navigate('/checkout')} 
+          style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            color: 'rgba(232, 232, 232, 0.7)',
+            border: '1px solid rgba(255, 215, 0, 0.2)',
+            borderRadius: '50px',
+            padding: '1rem 2rem',
+            fontSize: '1.1rem',
+            fontWeight: 600,
+            fontFamily: "'Inter', sans-serif",
+            cursor: 'pointer',
+            transition: 'all 0.4s ease',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+            textTransform: 'uppercase',
+            letterSpacing: '1px'
+          }}
+        >
+          Back to Checkout
+        </button>
       </div>
     </div>
   );

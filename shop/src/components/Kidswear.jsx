@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import kidswear from './kidswear.jpg';
 import logo from './logo.jpg';
 import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
-import { useCart } from './CartContext';
+import { useCart } from './useCartHook';
 
 export default function Kidswear() {
   const navigate = useNavigate();
@@ -77,24 +77,71 @@ export default function Kidswear() {
             <p style={{ textAlign: 'center', color: 'rgba(232, 232, 232, 0.7)' }}>100% cotton</p>
             <p style={{ textAlign: 'center', color: 'rgba(232, 232, 232, 0.7)' }}>Machine Wash</p>
             <p style={{ textAlign: 'center', color: 'rgba(232, 232, 232, 0.7)' }}>Available Sizes: 6-7 years, 8-9 years, 10-11 years</p>
-              <div class="size-select:" style={{ textAlign: 'center' }}>
-                <label for="size" style={{ textAlign: 'center', color: '#e8e8e8', fontWeight: '600' }}>Select Size:</label>
-                <select id="size" name="size" onchange="selectSize(this.value)" style={{height:'30px',width:'110px'}}>
+              <div className="size-select" style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+                <label
+                  htmlFor="size"
+                  style={{ textAlign: 'center', color: '#e8e8e8', fontWeight: '600', display: 'block', marginBottom: '0.75rem' }}
+                >
+                  Select Size:
+                </label>
+                <select
+                  id="size"
+                  name="size"
+                  style={{
+                    minWidth: '140px',
+                    padding: '0.45rem 0.9rem',
+                    borderRadius: '10px',
+                    border: '2px solid rgba(255, 215, 0, 0.5)',
+                    background: '#fdfdfd',
+                    color: '#000000',
+                    fontSize: '0.9rem',
+                  }}
+                >
                     <option value="">Choose Size</option>
                     <option value="6-7 years">6-7 years</option>
                     <option value="8-9 years">8-9 years</option>
                     <option value="10-11 years">10-11 years</option>
                 </select>
-               <br></br>
-               <br></br>
-                <button class="product"
-                onClick={handleAddToCart}
-                 style={{height:'40px',width:'100px', textAlign: 'center'}}> Add to Cart</button>
-
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <button class="product" onClick={handleAddToWishlist}
-                style={{height:'40px',width:'100px', textAlign: 'center'}}>
-                Add to Wishlist</button>
+               <div
+                 style={{
+                   marginTop: '1.5rem',
+                   display: 'flex',
+                   flexWrap: 'wrap',
+                   justifyContent: 'center',
+                   gap: '0.75rem',
+                 }}
+               >
+                 <button
+                   className="product-button product-button-primary"
+                   onClick={handleAddToCart}
+                   style={{
+                     minWidth: '170px',
+                     padding: '0.65rem 1.6rem',
+                     textAlign: 'center',
+                     borderRadius: '999px',
+                     fontWeight: 600,
+                     fontSize: '0.95rem',
+                     whiteSpace: 'nowrap',
+                   }}
+                 >
+                   Add to Cart
+                 </button>
+                 <button
+                   className="product-button product-button-secondary"
+                   onClick={handleAddToWishlist}
+                   style={{
+                     minWidth: '190px',
+                     padding: '0.65rem 1.6rem',
+                     textAlign: 'center',
+                     borderRadius: '999px',
+                     fontWeight: 600,
+                     fontSize: '0.95rem',
+                     whiteSpace: 'nowrap',
+                   }}
+                 >
+                   Add to Wishlist
+                 </button>
+               </div>
             </div>
             <h3 className="product-title" style={{ textAlign: 'center', color: '#e8e8e8', fontWeight: '600' }}>Kids Wear</h3>
             <p className="product-price" style={{ textAlign: 'center', color: '#ffd700', fontWeight: '700' }}>price - ₹249.99</p>

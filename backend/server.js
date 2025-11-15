@@ -4,6 +4,8 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import fileRoutes from "./routes/fileRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -16,6 +18,8 @@ app.use(cors());
 // Routes
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/files", fileRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Server Port
 const PORT = process.env.PORT || 5000;

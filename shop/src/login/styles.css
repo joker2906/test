@@ -1,18 +1,4 @@
-/* Global styles for the login system */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  color: #e8e8e8;
-  overflow-x: hidden;
-}
+/* Component-scoped styles for the login system; global theme comes from index.css */
 
 /* Shimmer animation for glassmorphism effect */
 @keyframes shimmer {
@@ -32,7 +18,7 @@ body {
 
 .gray:hover {
   background: rgba(255, 255, 255, 0.2);
-  color: #e8e8e8;
+  color: var(--text);
 }
 
 .forgotPasswordSpan:hover {

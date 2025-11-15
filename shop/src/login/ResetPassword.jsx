@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import loginImg from './login.png';
+import api from "../services/api";
 
 function ResetPassword() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { contact } = location.state || {};
+  const { token } = location.state || {};
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -109,7 +110,7 @@ function ResetPassword() {
     },
   };
 
-  const handleReset = (e) => {
+  const handleReset = async (e) => {
     e.preventDefault();
     if (!newPassword || !confirmPassword) {
       alert("⚠️ Please fill in both password fields.");
@@ -123,8 +124,14 @@ function ResetPassword() {
       alert("🔒 Passwords do not match!");
       return;
     }
-    alert("🎉 Password reset successful! You can now log in with your new password.");
-    navigate('/');
+    try {
+      await api.post('/users/reset', { token, newPassword });
+      alert("🎉 Password reset successful! You can now log in with your new password.");
+      navigate('/');
+    } catch (err) {
+      const msg = err?.response?.data?.message || 'Failed to reset password';
+      alert(`❌ ${msg}`);
+    }
   };
 
   return (

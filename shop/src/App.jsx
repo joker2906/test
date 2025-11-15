@@ -35,7 +35,8 @@ import Formalshoes from "./components/Formalshoes.jsx";
 import Runningshoes from "./components/Runningshoes.jsx";
 import Footheels from "./components/Footheels.jsx";
 import Footwearwomen from "./components/Footwearwomen.jsx";
-import { CartProvider } from "./components/CartContext.js";
+import { CartProvider } from "./components/CartContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
       <Router>
         <Routes>
             <Route path="/product" element={<ProductList />} />
-            <Route path="/add" element={<AddProduct />} /> {/* 👈 new route */}
+            <Route path="/add" element={<ProtectedRoute><AddProduct /></ProtectedRoute>} /> {/* 👈 protected */}
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -66,8 +67,8 @@ function App() {
             <Route path="/childdress" element={<Childdress />} />
             <Route path="/kidswear" element={<Kidswear />} />
             <Route path="/childboywear" element={<Childboywear />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/payment" element={<RazorpayPayment />} />
+            <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+            <Route path="/payment" element={<ProtectedRoute><RazorpayPayment /></ProtectedRoute>} />
             <Route path="/sunscreen" element={<Sunscreen />} />
             <Route path="/lipbalm" element={<Lipbalm />} />
             <Route path="/perfume" element={<Perfume />} />

@@ -1,6 +1,8 @@
 .footer {
-  background-color: #333;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  color: var(--text);
   padding: 40px 0 20px;
   margin-top: auto;
 }
@@ -21,7 +23,7 @@
 }
 
 .footer-column h3 {
-  color: #ffd700;
+  color: var(--primary);
   margin-bottom: 15px;
   font-size: 18px;
 }
@@ -41,23 +43,23 @@
 }
 
 .footer-column ul li a {
-  color: #ccc;
+  color: var(--muted);
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-column ul li a:hover {
-  color: #ffd700;
+  color: var(--primary);
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 20px;
-  border-top: 1px solid #555;
+  border-top: 1px solid var(--border);
   margin-top: 20px;
 }
 
 .footer-bottom p {
   margin: 0;
-  color: #ccc;
+  color: var(--muted);
 }

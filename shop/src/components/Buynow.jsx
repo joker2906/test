@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from './logo.jpg';
 import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
-import { useCart } from './CartContext';
+import { useCart } from './useCartHook';
 
 const Buynow = () => {
   const navigate = useNavigate();

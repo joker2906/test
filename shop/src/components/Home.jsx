@@ -25,7 +25,7 @@ import footheels from './footheels.jpg';
 import footwearwomens from './footwearwomens.jpg';
 import './Home.css';
 import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
-import { useCart } from './CartContext';
+import { useCart } from './useCartHook';
 import Footer from './Footer';
 
 export default function Home() {
@@ -84,7 +84,7 @@ export default function Home() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button className="search-button">
+            <button className="search-button" style={{ color: '#000000' }}>
               <FaSearch />
             </button>
           </div>

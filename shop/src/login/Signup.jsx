@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import loginImg from './login.png';
+import api from "../services/api";
 
 function Signup() {
   const navigate = useNavigate();
@@ -120,7 +121,7 @@ function Signup() {
     },
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       alert("⚠️ Please fill in all fields.");
@@ -134,12 +135,15 @@ function Signup() {
       alert("🔒 Passwords do not match!");
       return;
     }
-    if (!email.includes('@gmail.com')) {
-      alert("📧 Email must be a Gmail address.");
-      return;
+    try {
+      const name = `${firstName} ${lastName}`.trim();
+      await api.post('/users/register', { name, email, password });
+      alert(`🎉 Welcome, ${name}! Your account has been created successfully.`);
+      navigate('/');
+    } catch (err) {
+      const msg = err?.response?.data?.message || 'Registration failed';
+      alert(`❌ ${msg}`);
     }
-    alert(`🎉 Welcome, ${firstName} ${lastName}! Your account has been created successfully.`);
-    navigate('/');
   };
 
   return (

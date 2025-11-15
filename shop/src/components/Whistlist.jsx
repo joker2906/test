@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from './logo.jpg';
 import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
-import { useCart } from './CartContext';
+import { useCart } from './useCartHook';
 import './Wishlist.css';
 
 const Whistlist = () => {
@@ -53,7 +53,7 @@ const Whistlist = () => {
           </div>
         ) : (
           <div>
-            {filteredWishlist.map((item, index) => (
+            {filteredWishlist.map((item) => (
               <div key={`${item.name}-${item.size}`} className="wishlist-item" style={{ textAlign: 'left' }}>
                 <img src={item.image} alt={item.name} className="wishlist-item-image" />
                 <div className="wishlist-item-details" style={{ textAlign: 'left' }}>

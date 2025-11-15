@@ -4,6 +4,7 @@ import loginImg from "./login.png";
 import "./styles.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import api from "../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -115,8 +116,8 @@ function Login() {
     },
   };
 
-  // Handle login logic with Toasts
-  const handleLogin = (e) => {
+  // Handle login logic with backend API
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -127,30 +128,21 @@ function Login() {
       return;
     }
 
-    if (!email.includes("@gmail.com")) {
-      toast.error("📧 Email must be a valid Gmail address!", {
+    try {
+      const { data } = await api.post("/users/login", { email, password });
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user || {}));
+      }
+      toast.success("✅ Login successful! Redirecting...", {
         position: "top-center",
         theme: "dark",
       });
-      return;
+      setTimeout(() => navigate("/home"), 1200);
+    } catch (err) {
+      const msg = err?.response?.data?.message || "Login failed";
+      toast.error(`❌ ${msg}`, { position: "top-center", theme: "dark" });
     }
-
-    if (password.length < 8) {
-      toast.error("🔑 Password must be at least 8 characters long.", {
-        position: "top-center",
-        theme: "dark",
-      });
-      return;
-    }
-
-    toast.success("✅ Login successful! Redirecting...", {
-      position: "top-center",
-      theme: "dark",
-    });
-
-    setTimeout(() => {
-      navigate("/home");
-    }, 2500);
   };
 
   const handleSignUp = () => {

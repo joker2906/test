@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import loginImg from './login.png';
+import api from "../services/api";
 
 function ForgotPassword() {
   const navigate = useNavigate();
-  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
 
   const styles = {
     container: {
@@ -116,23 +117,22 @@ function ForgotPassword() {
     },
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!contact) {
-      alert("⚠️ Please enter your email or phone number!");
+    if (!email) {
+      alert("⚠️ Please enter your email!");
       return;
     }
-    const isEmail = contact.includes("@");
-    const isPhone = /^\d{10}$/.test(contact);
-
-    if (!isEmail && !isPhone) {
-      alert("📧 Please enter a valid email!");
-      return;
+    try {
+      const { data } = await api.post('/users/forgot', { email });
+      // In real app, link is sent to email; here we pass token via navigation
+      const token = data?.token;
+      alert(`✅ Reset link generated. Check your email.`);
+      navigate("/reset-password", { state: { token } });
+    } catch (err) {
+      const msg = err?.response?.data?.message || 'Failed to request reset';
+      alert(`❌ ${msg}`);
     }
-
-    alert(`✅ reset link sent to ${contact}`);
-    navigate("/reset-password", { state: { contact } });
   };
 
   return (
@@ -157,10 +157,10 @@ function ForgotPassword() {
 
           <form onSubmit={handleSubmit} style={{ width: "100%", position: "relative", zIndex: "2" }}>
             <input
-              type="text"
-              placeholder="Enter your email or phone"
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               style={styles.inputField}
               required
             />
