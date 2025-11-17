@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import loginImg from "./login.png";
 import "./styles.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../services/api";
+
 
 function Login() {
   const navigate = useNavigate();
@@ -162,11 +163,8 @@ function Login() {
   };
 
   const handleSigninwithGOOGLE = () => {
-    toast.success("🌐 Signing in with Google...", {
-      position: "top-center",
-      theme: "dark",
-    });
-    setTimeout(() => navigate("/home"), 2000);
+    // Navigate to dedicated Google login page
+    navigate("/googlelogin");
   };
 
   return (
@@ -255,6 +253,7 @@ function Login() {
             >
               Sign in with Google
             </button>
+                
           </form>
         </div>
       </div>

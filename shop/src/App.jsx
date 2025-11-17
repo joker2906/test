@@ -8,6 +8,7 @@ import Login from './login/Login.jsx';
 import Signup from './login/Signup.jsx';
 import ForgotPassword from './login/ForgotPassword.jsx';
 import ResetPassword from './login/ResetPassword.jsx';
+import Googlelogin from './login/Googlelogin.jsx';
 import Casualwear from "./components/Casualwear.jsx";
 import Formalwear from "./components/Formalwear.jsx";
 import Jeans from "./components/Jeans.jsx";
@@ -49,6 +50,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/googlelogin" element={<Googlelogin />} />
             <Route path="/home" element={<Home />} />
             <Route path="/casual" element={<Casualwear />} />
             <Route path="/formal" element={<Formalwear />} />
